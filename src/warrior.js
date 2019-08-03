@@ -3,8 +3,8 @@ export default class Warrior {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.img = new Image()
-        this.width = 100;
-        this.height = 150;
+        this.width = 150;
+        this.height = 200;
         this.position = {
             x: gameWidth / 4,
             y: gameHeight / 4
@@ -56,11 +56,11 @@ export default class Warrior {
     }
 
     draw(ctx) {
+        
         ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
     }
 
     update(deltaTime) {
-        if (!deltaTime) return;
         this.position.x += this.speed_x * deltaTime/4;
         this.position.y += this.speed_y * deltaTime/4;
 

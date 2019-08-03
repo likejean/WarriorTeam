@@ -1,5 +1,6 @@
 import Warrior from './warrior.js';
 import InputHandler from './input.js';
+import Follower from './follower.js';
 
 let canvas = document.getElementById('battleField');
 let ctx = canvas.getContext('2d');
@@ -12,6 +13,8 @@ const GAME_HEIGHT = 1000;
 ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
 let warrior = new Warrior(GAME_WIDTH, GAME_HEIGHT);
+let follower = new Follower(warrior);
+
 new InputHandler(warrior);
 
 
@@ -24,9 +27,11 @@ function gameLoop(timestamp) {
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     warrior.update(deltaTime);
     warrior.draw(ctx);
+    follower.update(deltaTime);
+    follower.draw(ctx);
     
     setTimeout(() => requestAnimationFrame(gameLoop), 80);
 }
 
-gameLoop();
+requestAnimationFrame(gameLoop);
 
