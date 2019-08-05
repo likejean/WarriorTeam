@@ -1,17 +1,18 @@
 export default class Warrior {
-    constructor(gameWidth, gameHeight) {     
-        this.gameWidth = gameWidth;
-        this.gameHeight = gameHeight;
+    constructor(game) {   
+        this.gameWidth = game.canvasWidth;
+        this.gameHeight = game.canvasHeight;
         this.img = new Image()
         this.width = 150;
         this.height = 200;
         this.position = {
-            x: gameWidth / 4,
-            y: gameHeight / 4
+            x: this.gameWidth / 4,
+            y: this.gameHeight / 4
         }  
         this.maxSpeed = 2; 
         this.speed_x = 0;
         this.speed_y = 0;
+        this.direction = new String();
         this.walkValue = 1;
         this.alternate = () => {
             if(this.walkValue === 1){
@@ -24,26 +25,31 @@ export default class Warrior {
 
     onload() {
         this.img.src = '../assets/StopDown.png';
+        this.direction = 'down';
     }
 
     moveLeft() {
         this.speed_x = -this.maxSpeed;
         this.img.src = '../assets/Left' + this.alternate() + '.png';
+        this.direction = 'left';
     };
 
     moveRight() {
         this.speed_x = this.maxSpeed;
         this.img.src = '../assets/Right' + this.alternate() + '.png';
+        this.direction = 'right';
     };
 
     moveUp() {
         this.speed_y = -this.maxSpeed;
         this.img.src = '../assets/Upward' + this.alternate() + '.png';
+        this.direction = 'up';
     };
 
     moveDown() {
         this.speed_y = this.maxSpeed;
         this.img.src = '../assets/Downward' + this.alternate() + '.png';
+        this.direction = 'down';
     };
 
     stop(key) {
