@@ -10,8 +10,7 @@ export default class TeamGeometry {
         this.MATRIX.forEach(item => {if(item[1] === true) item[1] = false;});
         this.collisions = [].concat(...this.followers.map( 
             (v, i) => this.followers.slice(i + 1).map(
-            (w) => {            
-                
+            (w) => { 
                 let dist = this.DISTANCE(
                 (v.position.x + v.width/2) - (w.position.x + w.width/2), 
                 (v.position.y + v.height/2) - (w.position.y + w.height/2));
@@ -28,12 +27,11 @@ export default class TeamGeometry {
                             follower.position_correction.y = 15*Math.sin(ang);
                         }
                         if (follower.id === w.id) {
-                            follower.position_correction.x = -25*Math.cos(ang);
-                            follower.position_correction.y = -25*Math.sin(ang);
+                            follower.position_correction.x = -15*Math.cos(ang);
+                            follower.position_correction.y = -15*Math.sin(ang);
                         }
                     });
                 }else {
-                   
                     this.followers.findIndex(follower => {
                         if (follower.id === v.id && this.MATRIX[v.id - 1][1] === false || follower.id === w.id && this.MATRIX[w.id - 1][1] === false) {
                             follower.position_correction.x = 0;
@@ -44,5 +42,4 @@ export default class TeamGeometry {
             }
         )));
     }
-    
 }

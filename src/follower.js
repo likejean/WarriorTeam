@@ -1,6 +1,7 @@
 export default class Follower {
-    constructor(warrior, x_pos, y_pos, index) {
+    constructor(warrior, x_pos, y_pos, index, canvas) {
         this.img = new Image();
+        this.canvas = canvas   
         this.id = index;
         this.width = 70;
         this.height = 95;
@@ -26,26 +27,27 @@ export default class Follower {
         this.warrior_space = Math.sqrt(Math.pow(this.warrior.width/2,2) + Math.pow(this.warrior.height/2,2)); //warrior's radius
         this.DISTANCE = () => Math.sqrt(Math.pow(this.dist_x(),2) + Math.pow(this.dist_y(),2));
         this.angle = () => this.dist_x() <= 0 ? Math.PI - Math.asin((this.dist_y())/this.DISTANCE()) : Math.asin((this.dist_y())/this.DISTANCE());
-
+             
     }
-
     draw(ctx) {
 
-        this.speed_x !== 0 || this.speed_y !== 0 
-        ? 
-        this.img.src = '../assets/Right' + this.alternate() + '.png'
-        :
-        this.img.src = '../assets/StopRight.png';
         ctx.save();
         ctx.translate(this.position.x, this.position.y); 
         ctx.rotate(this.angle());
         ctx.drawImage(this.img, this.width / -2, this.height / -2, this.width, this.height);        
         ctx.restore(); 
-        
+
+        this.position.x > 0 && this.position.y > 0 ?
+            this.speed_x !== 0 && this.speed_y !== 0 
+            ? 
+            this.img.src = '../assets/Right' + this.alternate() + '.png'
+            :
+            this.img.src = '../assets/StopRight.png'            
+        : this.img.src = '';
     }
 
     update(deltaTime) {
-
+      
         if (this.DISTANCE() > this.warrior_space + 100) {
             if (this.DISTANCE() > this.warrior_space + 250) {
                 this.position_correction.x = 0;
