@@ -1,13 +1,14 @@
 export default class Warrior {
-    constructor(game) {   
+    constructor(game) { 
+        
         this.gameWidth = game.canvasWidth;
-        this.gameHeight = game.canvasHeight;
+        this.gameHeight = game.canvasHeight;        
         this.img = new Image()
         this.width = 150;
         this.height = 200;
         this.position = {
-            x: this.gameWidth / 4,
-            y: this.gameHeight / 4
+            x: game.leader_init[0],
+            y: game.leader_init[1]
         }  
         this.maxSpeed = 2; 
         this.speed_x = 0;
