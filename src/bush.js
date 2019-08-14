@@ -1,22 +1,19 @@
 export default class Bush {
-    constructor (game) {
+    constructor (size1, size2, position, direction) {
         this.img = new Image();
         this.position = {
-            x: game.bushes_init[0],
-            y: game.bushes_init[1]
+            x: position.x,
+            y: position.y
         }
-        this.width = 200;
-        this.height = 75;
+        this.width = size1;
+        this.height = size2;
+        this.direction = direction;
+        
     }
 
     draw(ctx) {
-        this.img.src = '../assets/Bushes/TopBush.png';    
-        // console.log(this.img) 
+        this.img.src = '../assets/Bushes/' + this.direction + 'Bush.png';
         ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
-
-    }
-
-    update() {
 
     }
 }

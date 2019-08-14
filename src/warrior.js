@@ -13,6 +13,7 @@ export default class Warrior {
         this.maxSpeed = 2; 
         this.speed_x = 0;
         this.speed_y = 0;
+        this.clearance = 25;
         this.direction = new String();
         this.walkValue = 1;
         this.alternate = () => {
@@ -71,9 +72,9 @@ export default class Warrior {
         this.position.x += this.speed_x * deltaTime/4;
         this.position.y += this.speed_y * deltaTime/4;
 
-        if(this.position.x < 0) this.position.x = 0;
-        if(this.position.x + this.width > this.gameWidth) 
-        this.position.x = this.gameWidth - this.width; 
+        if(this.position.x < this.clearance) this.position.x = this.clearance;
+        if(this.position.x + this.width + this.clearance > this.gameWidth) 
+        this.position.x = this.gameWidth - this.width - this.clearance; 
 
         if(this.position.y < 0) this.position.y = 0;
         if(this.position.y + this.height > this.gameHeight) 
