@@ -1,19 +1,24 @@
+import { WarriorApproach } from './helpers/functions/warrior_functions.js';
+import { FollowerApproach } from './helpers/functions/follower_functions.js';
+
 export default class Wall {
-    constructor(game, position) {
+    constructor(game, position, size) {
         this.position = position;
-        this.img = new Image();
-        this.width = 100;
-        this.height = 100;
         this.game = game;
-    }
-
-    update() {
-
+        this.img = new Image();
+        this.width = size.x;
+        this.height = size.y;
+       
     }
 
     draw(ctx) {
         this.img.src = '../assets/Walls/Wall.png';
         ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
 
+    }
+
+    update() {
+        WarriorApproach(this);
+        FollowerApproach(this);
     }
 }

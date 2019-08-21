@@ -14,11 +14,10 @@ export default class TeamGeometry {
                 let dist = this.DISTANCE(
                 (v.position.x + v.width/2) - (w.position.x + w.width/2), 
                 (v.position.y + v.height/2) - (w.position.y + w.height/2));
-                
                 let ang = this.ANGLE(
                 (v.position.x + v.width/2) - (w.position.x + w.width/2), 
                 (v.position.y + v.height/2) - (w.position.y + w.height/2));
-                if (dist <= 35) {
+                if (dist <= 65) {
                     this.MATRIX[this.MATRIX.findIndex(x => x[0] === v.id)][1] = true;
                     this.MATRIX[this.MATRIX.findIndex(x => x[0] === w.id)][1] = true;                 
                     this.followers.findIndex(follower => {

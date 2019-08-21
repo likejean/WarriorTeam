@@ -28,16 +28,13 @@ export default function ToolTip(follower) {
             parent.removeChild(div);                    // remove from DOM
         }
         function check(e) {
-                
             if (!visible &&
                 e.clientX >= region.x && e.clientX < region.x + region.w &&
                 e.clientY >= region.y && e.clientY < region.y + region.h) {
                 show(region);                          // show tool-tip at this pos
             }
-            else setDivPos(region);                     // otherwise, update position
-            
+            else setDivPos(region);                    
         }
-      
         function setDivPos(pos) {
             if (visible){
                 if (pos.x < 0) pos.x = 0;
@@ -49,6 +46,5 @@ export default function ToolTip(follower) {
         }
         follower.canvas.addEventListener("mousemove", check);
         setTimeout(() => follower.canvas.removeEventListener("mousemove", check),1000); 
-    }    
-    
+    } 
 }

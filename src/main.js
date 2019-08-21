@@ -7,6 +7,7 @@ import * as Init from './helpers/init/index.js';
 import Boundaries from './helpers/boundaries.js';
 import BuildMap from './game_levels.js';
 
+
 export default class Game {
     constructor(canvasWidth, canvasHeight) {
         this.canvasWidth = canvasWidth;
@@ -21,13 +22,14 @@ export default class Game {
 
     start(canvas) {
         this.warrior = new Warrior(this);
-        this.walls = new BuildMap(this, this.map);
-        this.followers_init.map((follower, idx) => this.followers.push(new Follower(this.warrior, follower[0], follower[1], idx + 1, canvas)));
+        this.walls = new BuildMap(this);
+        this.followers_init.map((follower, idx) => this.followers.push(new Follower(this.warrior, this.walls, follower[0], follower[1], idx + 1, canvas)));
         this.geometry = new TeamGeometry(this.followers);
         new InputHandler(this.warrior);
+        this.bushes = Boundaries(this);
         this.tulips = this.followers.map(follower => new Tulip(follower));
-        
-        this.gameObjects = [this.warrior, ...this.followers, ...Boundaries(this),...this.walls];
+        this.gameObjects = [this.warrior, ...this.followers, ...this.bushes, ...this.walls];
+        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];
         
     }
 
@@ -38,10 +40,7 @@ export default class Game {
 
     update(deltaTime) {
         this.warrior.update(deltaTime);
-        this.followers.forEach((follower, idx) => {
-            follower.update(deltaTime); 
-            this.geometry.update(); 
-            this.tulips[idx].update()}
-        );
+        this.followers.forEach(follower => follower.update(deltaTime));
+        this.gameSubjects.forEach(subj => subj.update());
     }
 }

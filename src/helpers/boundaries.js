@@ -37,5 +37,6 @@ export default function Boundaries (game) {
         bushes.push(new Bush (size.side2, size.side1, position, direction));
         i--;
     }
+
     return bushes;
 }
