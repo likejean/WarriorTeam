@@ -1,12 +1,16 @@
-import { FollowZone, BackOffZone, StandByZone, FollowerApproach } from './helpers/functions/follower_functions.js';
+import { FollowZone, BackOffZone, StandByZone } from './helpers/functions/follower_functions.js';
 
 export default class Follower {
-    constructor(warrior, walls, x_pos, y_pos, index, canvas) {
+    constructor(game, x_pos, y_pos, index, canvas) {
         this.type = 'follower';        
         this.action = '';
         this.img = new Image();
         this.canvas = canvas;  
-        this.walls = walls; 
+        this.walls = game.walls; 
+        this.obstacle = new Object();
+        this.gridCellSize = game.gameGridCellSize;
+        this.i = x_pos;
+        this.j = y_pos;
         this.id = index;
         this.width = 100;
         this.height = 100;
@@ -29,14 +33,16 @@ export default class Follower {
                 return this.walkValue = 1;
             }
         };
-        this.position = {x: x_pos, y: y_pos};
-        this.warrior = warrior;
+        this.position = {x: this.i * this.gridCellSize, y: this.j * this.gridCellSize};
+        this.warrior = game.warrior;
         this.dist_x = (pos,w) => pos + w/2 - this.position.x;
         this.dist_y = (pos,h) => pos + h/2 - this.position.y;
         this.self_space = Math.sqrt(Math.pow(this.width/2,2) + Math.pow(this.height/2,2)); //follower's radius
         this.warrior_space = Math.sqrt(Math.pow(this.warrior.width/2,2) + Math.pow(this.warrior.height/2,2)); //warrior's radius
         this.DISTANCE = () => Math.sqrt(Math.pow(this.dist_x(this.warrior.position.x,this.warrior.width),2) + Math.pow(this.dist_y(this.warrior.position.y,this.warrior.height),2));
-        this.angle = () => this.dist_x(this.warrior.position.x,this.warrior.width) <= 0 ? Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE()) : Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE());
+        this.angle = () => this.dist_x(this.warrior.position.x,this.warrior.width) <= 0 ? Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE()) : Math.asin((this.dist_y(this.warrior.position.y, this.warrior.height))/this.DISTANCE())
+        
+
              
     }
     draw(ctx) {
@@ -52,6 +58,7 @@ export default class Follower {
         ctx.rotate(this.angle());
         ctx.drawImage(this.img, this.width / -2, this.height / -2, this.width, this.height);        
         ctx.restore();
+
     }
 
     update(deltaTime) {

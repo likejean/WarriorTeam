@@ -7,8 +7,7 @@ export default class Wall {
         this.game = game;
         this.img = new Image();
         this.width = size.x;
-        this.height = size.y;
-       
+        this.height = size.y;       
     }
 
     draw(ctx) {
@@ -17,8 +16,8 @@ export default class Wall {
 
     }
 
-    update() {
+    update(deltaTime) {
         WarriorApproach(this);
-        FollowerApproach(this);
+        // FollowerApproach(this, deltaTime);
     }
 }
