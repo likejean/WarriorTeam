@@ -26,20 +26,19 @@ export default class Game {
         
         this.warrior = new Warrior(this);
         this.walls = new BuildMap(this);
+        this.algorithm = new A_STAR_Algorithm(this);
         this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));
         this.geometry = new TeamGeometry(this.followers);
         new InputHandler(this.warrior);
         this.bushes = Boundaries(this);
         this.tulips = this.followers.map(follower => new Tulip(follower));
         this.gameObjects = [this.warrior, ...this.followers, ...this.bushes, ...this.walls];
-        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];
-        this.algorithm = new A_STAR_Algorithm(this);
+        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];        
         this.algorithm.start();
     }
 
     draw(ctx) {
         this.gameObjects.forEach(obj => obj.draw(ctx));
-        this.algorithm.draw(ctx);
     }
 
     update(deltaTime) {

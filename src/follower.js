@@ -2,6 +2,7 @@ import { FollowZone, BackOffZone, StandByZone } from './helpers/functions/follow
 
 export default class Follower {
     constructor(game, x_pos, y_pos, index, canvas) {
+        this.game = game;
         this.type = 'follower';        
         this.action = '';
         this.img = new Image();
@@ -33,6 +34,7 @@ export default class Follower {
                 return this.walkValue = 1;
             }
         };
+        
         this.position = {x: this.i * this.gridCellSize, y: this.j * this.gridCellSize};
         this.warrior = game.warrior;
         this.dist_x = (pos,w) => pos + w/2 - this.position.x;
@@ -46,6 +48,8 @@ export default class Follower {
              
     }
     draw(ctx) {
+        let path = this.game.algorithm.draw(ctx);
+        console.log(...path);
         this.position.x > 0 && this.position.y > 0 ?
             this.speed_x !== 0 && this.speed_y !== 0 
             ? 

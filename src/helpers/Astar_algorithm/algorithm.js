@@ -10,8 +10,9 @@ export default class A_STAR_Algorithm {
         this.grid = [...Array(this.cols)].fill().map((_,i) => Array(this.rows).fill().map((_,j) => new Spot(i, j, this.cellSize, this.cols, this.rows, this.matrix)));
         this.openSet = new Array();
         this.closedSet = new Array();
-        this.follower = this.grid[game.followers[0].i][game.followers[0].j];
+        this.follower = this.grid[game.followers_init[0][0]][game.followers_init[0][1]];
         this.warrior = this.grid[this.cols - 1][this.rows - 1];
+        this.curve = [];
         this.best = 0;
         this.removeFromArray = (set, element) => {
             for (var i = set.length - 1; i >= 0; i--) {
@@ -54,16 +55,17 @@ export default class A_STAR_Algorithm {
                 console.log('DONE!');
                 return;         
             };
-            var path = [], coors = [], curve = [];            
+            var path = [], coors = [];            
             var temp = current;
             path.push(temp);
             while(temp.previous) {
                 coors.push(temp.previous.center.x);
                 coors.push(temp.previous.center.y);
                 path.push(temp.previous);
-                curve.push(...temp.splinePoint);
+                this.curve = temp.splinePoint;
                 temp = temp.previous;
             }   
+            
             this.removeFromArray(this.openSet, current);
             this.closedSet.push(current);
             let neighbors = current.addNeighbors(this.grid);
@@ -91,14 +93,16 @@ export default class A_STAR_Algorithm {
             });
         } else {
             console.log('No solution!!')
-            // return;
+            
         }
         this.openSet.length > 0 ? console.log('solution') : console.log('no solution');
         this.closedSet.forEach(item => item.show(ctx, '#F51545')); 
         this.grid.forEach(col => col.forEach(row => row.addNeighbors(this.grid)));
         //Pat - blue
-        path.forEach(item => item.path(ctx, coors,'#211DCA')); 
-
+        path.forEach(item => item.path(ctx, coors,'#211DCA'));
+        // console.log(this.curve.select(elem => elem > 150));
+        return this.curve.reverse().filter((_, idx, arr) => arr[idx * 10]);
     }
+
 }
 
