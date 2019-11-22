@@ -1,4 +1,4 @@
-import { FollowZone, BackOffZone, StandByZone } from './helpers/functions/follower_functions.js';
+import { FollowZone, BackOffZone, StandByZone } from '../helpers/functions/follower_functions.js';
 
 export default class Follower {
     constructor(game, x_pos, y_pos, index, canvas) {
@@ -48,14 +48,14 @@ export default class Follower {
              
     }
     draw(ctx) {
-        let path = this.game.algorithm.draw(ctx);
-        console.log(...path);
+        //let path = this.game.algorithm.draw(ctx);
+        
         this.position.x > 0 && this.position.y > 0 ?
             this.speed_x !== 0 && this.speed_y !== 0 
             ? 
-            this.img.src = '../assets/Right' + this.alternate() + '.png'
+            this.img.src = 'assets/Right' + this.alternate() + '.png'
             :
-            this.img.src = '../assets/StopRight.png'            
+            this.img.src = 'assets/StopRight.png'            
         : this.img.src = '';
         ctx.save();
         ctx.translate(this.position.x, this.position.y); 

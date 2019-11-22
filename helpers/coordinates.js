@@ -9,3 +9,4 @@ function DisplayCoordinates(ev) {
 function ClearCoordinates() {
     document.getElementById("coordinates").innerHTML = "";
 }
+

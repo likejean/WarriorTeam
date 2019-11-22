@@ -10,7 +10,7 @@ export default class Bush {
         this.direction = direction;
     }
     draw(ctx) {
-        this.img.src = '../assets/Bushes/' + this.direction + 'Bush.png';
+        this.img.src = 'assets/Bushes/' + this.direction + 'Bush.png';
         ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
     }
 }

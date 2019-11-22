@@ -1,5 +1,5 @@
 import Game from './main.js';
-import { GridSize } from './helpers/init/index.js';
+import { GridSize } from '../helpers/init/index.js';
 
 let canvas = document.getElementById('battleField');
 let button = document.getElementById('btn');

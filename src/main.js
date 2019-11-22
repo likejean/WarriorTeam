@@ -2,11 +2,11 @@ import Warrior from './warrior.js';
 import InputHandler from './input.js';
 import Follower from './follower.js';
 import TeamGeometry from './team_geometry.js';
-import Tulip from './helpers/tulip.js';
-import * as Init from './helpers/init/index.js';
-import Boundaries from './helpers/boundaries.js';
+import Tulip from '../helpers/tulip.js';
+import * as Init from '../helpers/init/index.js';
+import Boundaries from '../helpers/boundaries.js';
 import BuildMap from './game_levels.js';
-import A_STAR_Algorithm from './helpers/Astar_algorithm/algorithm.js';
+//import A_STAR_Algorithm from '../helpers/Astar_algorithm/algorithm.js';
 
 
 export default class Game {
@@ -26,7 +26,7 @@ export default class Game {
         
         this.warrior = new Warrior(this);
         this.walls = new BuildMap(this);
-        this.algorithm = new A_STAR_Algorithm(this);
+        //this.algorithm = new A_STAR_Algorithm(this);
         this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));
         this.geometry = new TeamGeometry(this.followers);
         new InputHandler(this.warrior);
@@ -34,7 +34,7 @@ export default class Game {
         this.tulips = this.followers.map(follower => new Tulip(follower));
         this.gameObjects = [this.warrior, ...this.followers, ...this.bushes, ...this.walls];
         this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];        
-        this.algorithm.start();
+        //this.algorithm.start();
     }
 
     draw(ctx) {

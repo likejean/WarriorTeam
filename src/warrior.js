@@ -33,39 +33,39 @@ export default class Warrior {
     }
 
     onload() {
-        this.img.src = '../assets/StopDown.png';        
+        this.img.src = 'assets/StopDown.png';        
         this.direction = 'down';
     }
 
     moveLeft() {
         this.speed_x = -this.maxSpeed;
-        this.img.src = '../assets/Left' + this.alternate() + '.png';
+        this.img.src = 'assets/Left' + this.alternate() + '.png';
         this.direction = 'left';
     };
 
     moveRight() {
         this.speed_x = this.maxSpeed;
-        this.img.src = '../assets/Right' + this.alternate() + '.png';
+        this.img.src = 'assets/Right' + this.alternate() + '.png';
         this.direction = 'right';
     };
 
     moveUp() {
         this.speed_y = -this.maxSpeed;
-        this.img.src = '../assets/Upward' + this.alternate() + '.png';
+        this.img.src = 'assets/Upward' + this.alternate() + '.png';
         this.direction = 'up';
     };
 
     moveDown() {
         this.speed_y = this.maxSpeed;
-        this.img.src = '../assets/Downward' + this.alternate() + '.png';
+        this.img.src = 'assets/Downward' + this.alternate() + '.png';
         this.direction = 'down';
     };
 
     stop(key) {
-        if (key === 37) this.img.src = '../assets/StopLeft.png';
-        if (key === 39) this.img.src = '../assets/StopRight.png';
-        if (key === 38) this.img.src = '../assets/StopUp.png';
-        if (key === 40) this.img.src = '../assets/StopDown.png';
+        if (key === 37) this.img.src = 'assets/StopLeft.png';
+        if (key === 39) this.img.src = 'assets/StopRight.png';
+        if (key === 38) this.img.src = 'assets/StopUp.png';
+        if (key === 40) this.img.src = 'assets/StopDown.png';
         if(this.speed_x !== 0) this.speed_x = 0;
         if(this.speed_y !== 0) this.speed_y = 0;
     }

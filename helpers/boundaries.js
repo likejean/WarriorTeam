@@ -1,4 +1,4 @@
-import Bush from '../bush.js';
+import Bush from '../src/bush.js';
 
 export default function Boundaries (game) {
     let bushes = [], i = 0, position = {x:0, y: 0}, direction = '', size = game.bushSize;   

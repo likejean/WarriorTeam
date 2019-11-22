@@ -16,9 +16,7 @@ export function Spot (i, j, cellSize, cols, rows, matrix) {
         y: this.j * this.cell_size + this.cell_size/2
     };
     this.wall = this.matrix[this.j][this.i] === 0 ? false : true;
-    // this.wall = false;
-    // if (Math.random(1) < 0.5)  this.wall = true;
-    // this.wall = false;
+    
     this.previous = undefined;
 
     this.show = (ctx, color) => { 
