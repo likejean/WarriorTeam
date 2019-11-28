@@ -17,7 +17,9 @@ export default class Follower {
         this.height = 100;
         this.maxSpeed = 2; 
         this.speed_x = 0;
+        this.speed_y = 0;
         this.walkValue = 1;
+        this.death = false;
         this.boundary_clearance = 110;
         this.wall_offset ={
             x: 3,
@@ -44,11 +46,8 @@ export default class Follower {
         this.DISTANCE = () => Math.sqrt(Math.pow(this.dist_x(this.warrior.position.x,this.warrior.width),2) + Math.pow(this.dist_y(this.warrior.position.y,this.warrior.height),2));
         this.angle = () => this.dist_x(this.warrior.position.x,this.warrior.width) <= 0 ? Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE()) : Math.asin((this.dist_y(this.warrior.position.y, this.warrior.height))/this.DISTANCE())
         
-
-             
     }
     draw(ctx) {
-        //let path = this.game.algorithm.draw(ctx);
         
         this.position.x > 0 && this.position.y > 0 ?
             this.speed_x !== 0 && this.speed_y !== 0 

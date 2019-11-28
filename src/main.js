@@ -14,12 +14,14 @@ export default class Game {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.gameGridCellSize = cellSize;
-        this.leader_init = Init.Leader;
+        this.leader_init = Init.Leader;        
+        this.cannons_init = Init.Cannons;
         this.bushSize = Init.bushSize;
+        this.cannonSize = Init.cannonSize;
         this.followers_init = Init.Followers;
         this.gridSize = Init.GridSize;
         this.map = Init.Map;
-        this.followers = new Array();
+        this.followers = [];
     }
 
     start(canvas) {

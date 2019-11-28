@@ -122,7 +122,7 @@ export const StandByZone = object => {
 
 ///////////////WALL COLLISSIONS///////////////
 
-export const FollowerApproach = (object, deltaTime) => 
+export const FollowerApproach = object => 
     
     object.game.followers.forEach(follower => {
 
