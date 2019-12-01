@@ -21,7 +21,27 @@ export default class CannonBall {
         if (this.direction == 0) ctx.drawImage(this.img, this.position.x - 35, this.position.y + 60, this.width, this.height);
         if (this.direction == 1) ctx.drawImage(this.img, this.position.x + 185, this.position.y + 60, this.width, this.height);
         if (this.direction == 2) ctx.drawImage(this.img, this.position.x + 75, this.position.y - 40, this.width, this.height);
-        if (this.direction == 3) ctx.drawImage(this.img, this.position.x + 75, this.position.y + 160, this.width, this.height);        
+        if (this.direction == 3) ctx.drawImage(this.img, this.position.x + 75, this.position.y + 160, this.width, this.height);     
+        
+        if(this.travel > this.range - 50){
+            for (let i = 1; i <= 3; i++) {
+                setTimeout(() => {
+                    this.img.src = 'assets/Weapons/Explosion' + i + '.png';
+                    if (this.direction == 0) ctx.drawImage(this.img, this.position.x - 100, this.position.y - 50, 250, 250);
+                    if (this.direction == 1) ctx.drawImage(this.img, this.position.x + 100, this.position.y - 50, 250, 250);
+                    if (this.direction == 2) ctx.drawImage(this.img, this.position.x, this.position.y - 150, 250, 250);
+                    if (this.direction == 3) ctx.drawImage(this.img, this.position.x, this.position.y, 250, 250);
+                }, i * 25);
+            }
+        }
+        
+        // this.img.src = 'assets/Weapons/Explosion' + i + '.png';
+        // if (this.direction == 0) ctx.drawImage(this.img, this.position.x - 100, this.position.y - 50, 250, 250);
+        // if (this.direction == 1) ctx.drawImage(this.img, this.position.x + 100, this.position.y - 50, 250, 250);
+        // if (this.direction == 2) ctx.drawImage(this.img, this.position.x, this.position.y - 150, 250, 250);
+        // if (this.direction == 3) ctx.drawImage(this.img, this.position.x, this.position.y, 250, 250);
+
+       
     }
 
     update(deltaTime) {        
