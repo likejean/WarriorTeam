@@ -1,5 +1,5 @@
-import { WarriorApproach } from '../helpers/functions/warrior_functions.js';
-import { FollowerApproach } from '../helpers/functions/follower_functions.js';
+import { WarriorCollision } from '../helpers/functions/warrior_functions.js';
+import { FollowerCollision } from '../helpers/functions/follower_functions.js';
 import CannonBall from './cannonball.js';
 export default class Cannon {
     constructor (game, size, position) {
@@ -14,7 +14,7 @@ export default class Cannon {
         this.direction = 0;
         this.life = 10;
         this.ammunition = 1000;
-        this.cannonball = new CannonBall(position, this.ammunition); 
+        this.cannonball = new CannonBall(position, this.ammunition, this.game.followers); 
     }
 
     
@@ -27,7 +27,7 @@ export default class Cannon {
 
     update(deltaTime) {
         this.cannonball.ammunition > 0 ? this.cannonball.update(deltaTime/5) : null;
-        WarriorApproach(this);
-        FollowerApproach(this, deltaTime);
+        WarriorCollision(this);
+        FollowerCollision(this, deltaTime);
     }
 }

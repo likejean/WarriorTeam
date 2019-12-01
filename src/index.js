@@ -24,10 +24,9 @@ let lastTime = 0;
 function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    game.draw(ctx);
+    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);    
     game.update(deltaTime);
-    
+    game.draw(ctx);
     setTimeout(() => requestAnimationFrame(gameLoop), 100);
 }
 

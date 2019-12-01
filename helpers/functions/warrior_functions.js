@@ -1,6 +1,6 @@
 import  { DetectWarriorApproach } from './approach_detection.js';
 
-export const WarriorApproach = object => 
+export const WarriorCollision = object => 
      DetectWarriorApproach(object.game.warrior, object)[0] && 
      DetectWarriorApproach(object.game.warrior, object)[1] === 'up' &&  
     object.game.warrior.direction === 'up'

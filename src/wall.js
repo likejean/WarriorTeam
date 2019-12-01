@@ -1,6 +1,6 @@
   
-import { WarriorApproach } from '../helpers/functions/warrior_functions.js';
-import { FollowerApproach } from '../helpers/functions/follower_functions.js';
+import { WarriorCollision } from '../helpers/functions/warrior_functions.js';
+import { FollowerCollision } from '../helpers/functions/follower_functions.js';
 
 export default class Wall {
     constructor(game, position, size) {
@@ -18,7 +18,7 @@ export default class Wall {
     }
 
     update(deltaTime) {
-        WarriorApproach(this);
-        FollowerApproach(this, deltaTime);
+        WarriorCollision(this);
+        FollowerCollision(this, deltaTime);
     }
 }

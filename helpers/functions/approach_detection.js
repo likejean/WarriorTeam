@@ -31,7 +31,8 @@ export const DetectWarriorApproach = (mobileObject, staticObject) => {
             bottomOfMobObj - mobileObject.wall_offset.x > topOfStaticObj &&         
             topOfMobObj + mobileObject.wall_offset.x < bottomOfStaticObj &&
             mobileObject.direction === "right" ? [true,'right']
-        :   [false, ''] 
+        :   
+    [false, ''] 
      
 }
 

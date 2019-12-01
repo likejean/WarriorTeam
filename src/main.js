@@ -46,6 +46,7 @@ export default class Game {
     update(deltaTime) {
         this.warrior.update(deltaTime);
         this.followers.forEach(follower => follower.update(deltaTime));
+        this.followers = [...this.followers].filter(follower => follower.health !== 0);
         this.gameSubjects.forEach(subj => subj.update(deltaTime));
     }
 }

@@ -3,8 +3,6 @@ import { DetectFollowerApproach } from './approach_detection.js';
 /////////FOLLOW ZONE////////////////
 
 export const FollowZone = (object, deltaTime) => {
-    
-    object.action = 'follow';
     object.speed_y = object.maxSpeed;
     object.speed_x = object.maxSpeed;
     if(object.position.y >= object.boundary_clearance && object.position.y <= object.warrior.gameHeight - object.boundary_clearance) {
@@ -122,40 +120,63 @@ export const StandByZone = object => {
 
 ///////////////WALL COLLISSIONS///////////////
 
-export const FollowerApproach = object => 
+export const FollowerCollision = (object, deltaTime) => 
     
     object.game.followers.forEach(follower => {
-
-        const HandleCollisionVertically = (objPos, pol, offset) => {
-            follower.position.y = objPos + pol * offset + 50;
-            follower.action = 'collision';
+        const HandleCollisionVertically = (objPos, pol, offset) => {  
+                      
+            follower.collision = true;
+           
+            follower.position.x - follower.warrior.position.x - 135 >= 0
+            ? 
+                follower.position.x -= deltaTime/10 
+            : 
+                follower.position.x += deltaTime/10;
+                 
+            follower.position.y < object.position.y && follower.position.y < follower.warrior.position.y ||
+            follower.position.y > object.position.y && follower.position.y > follower.warrior.position.y
+            ?
+                follower.position.y = objPos + pol * offset + 50
+            :
+                null;
         }
         const HandleCollisionHorizontally = (objPos, pol, offset) => {
-            follower.position.x = objPos + pol * offset + 50;
-            follower.action = 'collision';
+            
+            follower.collision = true;
+            follower.position.y - follower.warrior.position.y - 135 >= 0 
+            ? 
+                follower.position.y -= deltaTime/10 
+            : 
+                follower.position.y += deltaTime/10;
+            follower.position.x < object.position.x && follower.position.x < follower.warrior.position.x ||
+            follower.position.x > object.position.x && follower.position.x > follower.warrior.position.x
+            ?
+                follower.position.x = objPos + pol * offset + 50
+            : 
+                null;
         }
 
-    return  DetectFollowerApproach(follower, object)[0] && 
-            DetectFollowerApproach(follower, object)[1] === 'up' 
-            ?
-            HandleCollisionVertically(object.position.y, 1, object.height)
-            :
-            DetectFollowerApproach(follower, object)[0] && 
-            DetectFollowerApproach(follower, object)[1] === 'down' 
-            ?
-            HandleCollisionVertically(object.position.y, -1, follower.height)
-            :
-            DetectFollowerApproach(follower, object)[0] && 
-            DetectFollowerApproach(follower, object)[1] === 'left' 
-            ?
-            HandleCollisionHorizontally(object.position.x, 1, object.height)
-            :
-            DetectFollowerApproach(follower, object)[0] && 
-            DetectFollowerApproach(follower, object)[1] === 'right'
-            ?
-            HandleCollisionHorizontally(object.position.x, -1, follower.height)
-            :
-        null;
+        DetectFollowerApproach(follower, object)[0] && 
+        DetectFollowerApproach(follower, object)[1] === 'up' 
+        ?
+        HandleCollisionVertically(object.position.y, 1, object.height)
+        :
+        DetectFollowerApproach(follower, object)[0] && 
+        DetectFollowerApproach(follower, object)[1] === 'down' 
+        ?
+        HandleCollisionVertically(object.position.y, -1, follower.height)
+        :
+        DetectFollowerApproach(follower, object)[0] && 
+        DetectFollowerApproach(follower, object)[1] === 'left' 
+        ?
+        HandleCollisionHorizontally(object.position.x, 1, object.height)
+        :
+        DetectFollowerApproach(follower, object)[0] && 
+        DetectFollowerApproach(follower, object)[1] === 'right'
+        ?
+        HandleCollisionHorizontally(object.position.x, -1, follower.height)
+        :        
+    follower.collision = false
 });
         
 
