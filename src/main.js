@@ -6,6 +6,7 @@ import Tulip from '../helpers/tulip.js';
 import * as Init from '../helpers/init/index.js';
 import Boundaries from '../helpers/boundaries.js';
 import BuildMap from './game_levels.js';
+import { Statistics, Update } from '../helpers/statistics.js';
 //import A_STAR_Algorithm from '../helpers/Astar_algorithm/algorithm.js';
 
 
@@ -37,6 +38,8 @@ export default class Game {
         this.gameObjects = [this.warrior, ...this.followers, ...this.bushes, ...this.walls];
         this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];        
         //this.algorithm.start();
+        Statistics(this.followers);
+        
     }
 
     draw(ctx) {
@@ -46,7 +49,8 @@ export default class Game {
     update(deltaTime) {
         this.warrior.update(deltaTime);
         this.followers.forEach(follower => follower.update(deltaTime));
-        this.followers = [...this.followers].filter(follower => follower.health !== 0);
+        this.followers = [...this.followers].filter(follower => follower.health !== 0); 
+        Update(this.followers);       
         this.gameSubjects.forEach(subj => subj.update(deltaTime));
     }
 }

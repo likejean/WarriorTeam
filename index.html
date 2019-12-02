@@ -9,10 +9,9 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-        
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="helpers/coordinates.js" type="application/javascript"></script>
+        <script src="helpers/coordinates.js" type="application/javascript"></script>        
         <script src="helpers/video.js" type="application/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/2.9.4/bluebird.min.js"></script>
         <!-- <script src="./src/helpers/Astar_algorithm/curve.js"></script> -->
@@ -36,8 +35,20 @@
         } 
         label:after { 
             content: ": " 
-            }
-       
+        }
+        .bar-container {
+            width: 500px;
+            height: 50px;
+            margin-bottom: 25px;
+            border-style: groove;
+            border-color: green;
+            background-color:whitesmoke;
+        }
+        .bar {
+            background-color: greenyellow;
+            height: 100%;
+            width: 100%;
+        }       
     </style>
 
     <body>
@@ -52,6 +63,7 @@
             height='2000px'
         >
         </canvas>
+        <div id="followers"></div>
         <p style="font-size: 75px;">
             User Arrow Keys to Move Warrior Leader 'Up', 'Down', 'Right', 'Left'
         </p>
@@ -62,5 +74,4 @@
     </body>
     
     <script src='./src/index.js' type="module"></script>  
-    
 </html>

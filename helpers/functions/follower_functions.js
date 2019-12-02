@@ -133,12 +133,12 @@ export const FollowerCollision = (object, deltaTime) =>
             : 
                 follower.position.x += deltaTime/10;
                  
-            follower.position.y < object.position.y && follower.position.y < follower.warrior.position.y ||
-            follower.position.y > object.position.y && follower.position.y > follower.warrior.position.y
-            ?
+            // follower.position.y < object.position.y && follower.position.y < follower.warrior.position.y ||
+            // follower.position.y > object.position.y && follower.position.y > follower.warrior.position.y
+            // ?
                 follower.position.y = objPos + pol * offset + 50
-            :
-                null;
+            // :
+            //     null;
         }
         const HandleCollisionHorizontally = (objPos, pol, offset) => {
             
@@ -148,12 +148,12 @@ export const FollowerCollision = (object, deltaTime) =>
                 follower.position.y -= deltaTime/10 
             : 
                 follower.position.y += deltaTime/10;
-            follower.position.x < object.position.x && follower.position.x < follower.warrior.position.x ||
-            follower.position.x > object.position.x && follower.position.x > follower.warrior.position.x
-            ?
+            // follower.position.x < object.position.x && follower.position.x < follower.warrior.position.x ||
+            // follower.position.x > object.position.x && follower.position.x > follower.warrior.position.x
+            // ?
                 follower.position.x = objPos + pol * offset + 50
-            : 
-                null;
+            // : 
+            //     null;
         }
 
         DetectFollowerApproach(follower, object)[0] && 

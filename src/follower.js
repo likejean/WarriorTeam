@@ -72,12 +72,10 @@ export default class Follower {
     }
 
     update(deltaTime) {
-        this.DISTANCE() > this.warrior_space + 250 
+        this.DISTANCE() > this.warrior_space + 255 
         ? 
         this.collision === false ? FollowZone(this, deltaTime) : null
         : 
-        this.DISTANCE() <= this.self_space + 100 ? BackOffZone(this, deltaTime)
-        : 
-        StandByZone(this);
+        this.DISTANCE() <= this.self_space + 100 ? BackOffZone(this, deltaTime) : StandByZone(this);
     }
 }
