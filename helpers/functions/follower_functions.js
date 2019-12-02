@@ -29,68 +29,80 @@ export const BackOffZone = (object, deltaTime) => {
     object.speed_x = object.maxSpeed;
     switch(object.warrior.direction){
 
-    case 'up':  
-        object.warrior.position.x + object.warrior.width/2 - object.position.x >= 0 
-        ? 
-        object.position.x - object.boundary_clearance >= 0 
+    case 'up': 
+        object.collision === false
+        ?
+            object.warrior.position.x + object.warrior.width/2 - object.position.x >= 0 
             ? 
-            object.position.x -= object.speed_x * deltaTime/5 
+            object.position.x - object.boundary_clearance >= 0 
+                ? 
+                object.position.x -= object.speed_x * deltaTime/5 
+                : 
+                object.position.x += object.speed_x * deltaTime/5
             : 
-            object.position.x += object.speed_x * deltaTime/5
-        : 
-        object.position.x + object.width + object.boundary_clearance <= object.warrior.gameWidth 
-            ? 
-            object.position.x += object.speed_x * deltaTime/5
-            :
-            object.position.x -= object.speed_x * deltaTime/5
+            object.position.x + object.width + object.boundary_clearance <= object.warrior.gameWidth 
+                ? 
+                object.position.x += object.speed_x * deltaTime/5
+                :
+                object.position.x -= object.speed_x * deltaTime/5
+        :   null
     break;
     
     case 'down':
-        object.warrior.position.x + object.warrior.width/2 - object.position.x >= 0 
-        ? 
-        object.position.x - object.boundary_clearance >= 0 
+        object.collision === false 
+        ?
+            object.warrior.position.x + object.warrior.width/2 - object.position.x >= 0 
             ? 
-            object.position.x -= object.speed_x * deltaTime/5 
+            object.position.x - object.boundary_clearance >= 0 
+                ? 
+                object.position.x -= object.speed_x * deltaTime/5 
+                : 
+                object.position.x += object.speed_x * deltaTime/5
             : 
-            object.position.x += object.speed_x * deltaTime/5
-        : 
-        object.position.x + object.width + object.boundary_clearance <= object.warrior.gameWidth 
-            ? 
-            object.position.x += object.speed_x * deltaTime/5
-            :
-            object.position.x -= object.speed_x * deltaTime/5
+            object.position.x + object.width + object.boundary_clearance <= object.warrior.gameWidth 
+                ? 
+                object.position.x += object.speed_x * deltaTime/5
+                :
+                object.position.x -= object.speed_x * deltaTime/5
+        :   null
     break;
 
     case 'right':
-        object.warrior.position.y + object.warrior.height/2 - object.position.y >=0
-        ? 
-        object.position.y - object.boundary_clearance >= 0
-            ?
-            object.position.y -= object.speed_y * deltaTime/5 
-            :
-            object.position.y += object.speed_y * deltaTime/5
-        : 
-        object.position.y + object.height + object.boundary_clearance <= object.warrior.gameHeight
-            ?
-            object.position.y += object.speed_y * deltaTime/5
-            :
-            object.position.y -= object.speed_y * deltaTime/5
+        object.collision === false 
+        ?
+            object.warrior.position.y + object.warrior.height/2 - object.position.y >=0
+            ? 
+            object.position.y - object.boundary_clearance >= 0
+                ?
+                object.position.y -= object.speed_y * deltaTime/5 
+                :
+                object.position.y += object.speed_y * deltaTime/5
+            : 
+            object.position.y + object.height + object.boundary_clearance <= object.warrior.gameHeight
+                ?
+                object.position.y += object.speed_y * deltaTime/5
+                :
+                object.position.y -= object.speed_y * deltaTime/5
+        :   null
     break;
 
     case 'left':
+        object.collision === false 
+        ?
         object.warrior.position.y + object.warrior.height/2 - object.position.y >=0
         ? 
-        object.position.y - object.boundary_clearance >= 0
-            ?
-            object.position.y -= object.speed_y * deltaTime/5 
-            :
-            object.position.y += object.speed_y * deltaTime/5
-        : 
-        object.position.y + object.height + object.boundary_clearance <= object.warrior.gameHeight
-            ?
-            object.position.y += object.speed_y * deltaTime/5
-            :
-            object.position.y -= object.speed_y * deltaTime/5
+            object.position.y - object.boundary_clearance >= 0
+                ?
+                object.position.y -= object.speed_y * deltaTime/5 
+                :
+                object.position.y += object.speed_y * deltaTime/5
+            : 
+            object.position.y + object.height + object.boundary_clearance <= object.warrior.gameHeight
+                ?
+                object.position.y += object.speed_y * deltaTime/5
+                :
+                object.position.y -= object.speed_y * deltaTime/5
+        : null
     break;
     }
 }
@@ -132,13 +144,9 @@ export const FollowerCollision = (object, deltaTime) =>
                 follower.position.x -= deltaTime/10 
             : 
                 follower.position.x += deltaTime/10;
-                 
-            // follower.position.y < object.position.y && follower.position.y < follower.warrior.position.y ||
-            // follower.position.y > object.position.y && follower.position.y > follower.warrior.position.y
-            // ?
-                follower.position.y = objPos + pol * offset + 50
-            // :
-            //     null;
+         
+            follower.position.y = objPos + pol * offset + 50
+
         }
         const HandleCollisionHorizontally = (objPos, pol, offset) => {
             
@@ -148,12 +156,9 @@ export const FollowerCollision = (object, deltaTime) =>
                 follower.position.y -= deltaTime/10 
             : 
                 follower.position.y += deltaTime/10;
-            // follower.position.x < object.position.x && follower.position.x < follower.warrior.position.x ||
-            // follower.position.x > object.position.x && follower.position.x > follower.warrior.position.x
-            // ?
-                follower.position.x = objPos + pol * offset + 50
-            // : 
-            //     null;
+          
+            follower.position.x = objPos + pol * offset + 50
+
         }
 
         DetectFollowerApproach(follower, object)[0] && 

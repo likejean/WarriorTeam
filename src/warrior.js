@@ -7,8 +7,8 @@ export default class Warrior {
         this.img = new Image();    
         this.game = game;
         this.type = 'warrior';
-        this.width = 200;
-        this.height = 200;
+        this.width = 175;
+        this.height = 175;
         this.position = {
             x: game.leader_init[0],
             y: game.leader_init[1]
