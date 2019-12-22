@@ -13,7 +13,7 @@ export default class CannonBall {
         this.height = 50;
         this.speed  = 1;
         this.range = 1000;
-        this.direction = Math.round(Math.random()*3);
+        this.direction = 0;
         this.travel = 0;
     }
     draw(ctx) {
@@ -33,15 +33,7 @@ export default class CannonBall {
                     if (this.direction == 3) ctx.drawImage(this.img, this.position.x, this.position.y, 250, 250);
                 }, i * 25);
             }
-        }
-        
-        // this.img.src = 'assets/Weapons/Explosion' + i + '.png';
-        // if (this.direction == 0) ctx.drawImage(this.img, this.position.x - 100, this.position.y - 50, 250, 250);
-        // if (this.direction == 1) ctx.drawImage(this.img, this.position.x + 100, this.position.y - 50, 250, 250);
-        // if (this.direction == 2) ctx.drawImage(this.img, this.position.x, this.position.y - 150, 250, 250);
-        // if (this.direction == 3) ctx.drawImage(this.img, this.position.x, this.position.y, 250, 250);
-
-       
+        }               
     }
 
     update(deltaTime) {        

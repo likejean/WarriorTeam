@@ -27,7 +27,7 @@ function gameLoop(timestamp) {
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);    
     game.update(deltaTime);
     game.draw(ctx);
-    setTimeout(() => requestAnimationFrame(gameLoop), 100);
+    setTimeout(() => requestAnimationFrame(gameLoop), 50);
 }
 
 requestAnimationFrame(gameLoop);

@@ -6,6 +6,7 @@ import Tulip from '../helpers/tulip.js';
 import * as Init from '../helpers/init/index.js';
 import Boundaries from '../helpers/boundaries.js';
 import BuildMap from './game_levels.js';
+import Tank from './tank.js';
 import { Statistics, Update } from '../helpers/statistics.js';
 //import A_STAR_Algorithm from '../helpers/Astar_algorithm/algorithm.js';
 
@@ -18,6 +19,7 @@ export default class Game {
         this.leader_init = Init.Leader;        
         this.cannons_init = Init.Cannons;
         this.bushSize = Init.bushSize;
+        this.tank_init = Init.Tanks;
         this.cannonSize = Init.cannonSize;
         this.followers_init = Init.Followers;
         this.gridSize = Init.GridSize;
@@ -27,7 +29,9 @@ export default class Game {
 
     start(canvas) {
         
+        
         this.warrior = new Warrior(this);
+        this.tank = new Tank(this);
         this.walls = new BuildMap(this);
         //this.algorithm = new A_STAR_Algorithm(this);
         this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));
@@ -35,8 +39,8 @@ export default class Game {
         new InputHandler(this.warrior);
         this.bushes = Boundaries(this);
         this.tulips = this.followers.map(follower => new Tulip(follower));
-        this.gameObjects = [this.warrior, ...this.followers, ...this.bushes, ...this.walls];
-        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls];        
+        this.gameObjects = [this.warrior, this.tank, ...this.followers, ...this.bushes, ...this.walls];
+        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls, this.tank];        
         //this.algorithm.start();
         Statistics(this.followers);
         

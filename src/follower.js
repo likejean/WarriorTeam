@@ -45,7 +45,7 @@ export default class Follower {
         this.warrior_space = Math.sqrt(Math.pow(this.warrior.width/2,2) + Math.pow(this.warrior.height/2,2)); //warrior's radius
         this.DISTANCE = () => Math.sqrt(Math.pow(this.dist_x(this.warrior.position.x,this.warrior.width),2) + Math.pow(this.dist_y(this.warrior.position.y,this.warrior.height),2));
         this.angle = () => 
-            this.dist_x(this.warrior.position.x,this.warrior.width) <= 0 
+            this.dist_x(this.warrior.position.x, this.warrior.width) <= 0 
             ? 
                 Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE()) 
             : 

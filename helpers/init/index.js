@@ -1,4 +1,5 @@
-export const Leader = [500, 2500];
+export const Leader = [2500, 3500];
+export const Tanks = [3300, 3000];
 
 
 export const Followers = [[2, 3],[5, 1],[6, 16], [15, 5], [4, 5],[2, 10],[15, 13], [9, 4]];
