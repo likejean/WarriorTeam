@@ -12,6 +12,7 @@ export default class Cannon {
         this.width = size.x;
         this.height = size.y;
         this.direction = 0;
+        this.crushed = false;
         this.life = 10;
         this.ammunition = 1000;
         this.cannonball = new CannonBall(position, this.ammunition, this.game.followers); 

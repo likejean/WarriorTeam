@@ -2,6 +2,7 @@ import Wall from './wall.js';
 import Cannon from './cannon.js';
 export default function BuildMap(game) {
     let walls = [];
+    let idx = 0;
     let wall_size = {x: game.gameGridCellSize, y: game.gameGridCellSize};
     let cannon_size = {x: game.cannonSize.side1, y: game.cannonSize.side2};
     game.map.forEach((row, rowIdx) => {
@@ -11,7 +12,7 @@ export default function BuildMap(game) {
                     x: wall_size.x * colIdx,
                     y: wall_size.y * rowIdx
                 };
-                walls.push(new Wall(game, position, wall_size))
+                walls.push(new Wall(game, idx++, position, wall_size))
             }
         });
     });

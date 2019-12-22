@@ -5,12 +5,11 @@ export default class TeamGeometry {
         this.ANGLE = (deltaX, deltaY) => deltaX <= 0 ? Math.PI - Math.asin(deltaY/this.DISTANCE(deltaX, deltaY)) : Math.asin(deltaY/this.DISTANCE(deltaX, deltaY));
         this.MATRIX = Array(this.followers.length).fill().map((item, index) => [index + 1, false]);
     }
-
     update() {
         this.MATRIX.forEach(item => {if(item[1] === true) item[1] = false;});
         this.collisions = [].concat(...this.followers.map( 
             (v, i) => this.followers.slice(i + 1).map(
-            (w) => { 
+            w => { 
                 let dist = this.DISTANCE(
                 (v.position.x + v.width/2) - (w.position.x + w.width/2), 
                 (v.position.y + v.height/2) - (w.position.y + w.height/2));

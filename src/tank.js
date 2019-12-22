@@ -25,7 +25,7 @@ export default class Tank {
         };  
         //Randomnizes direction in dx & dy components
         this.vector = {
-            dx: 6500,
+            dx: -6500,
             dy: -6000
         };
         this.angle = () =>

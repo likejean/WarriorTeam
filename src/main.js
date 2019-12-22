@@ -27,33 +27,34 @@ export default class Game {
         this.followers = [];
     }
 
-    start(canvas) {
-        
+    start(canvas) {       
         
         this.warrior = new Warrior(this);
         this.tank = new Tank(this);
-        this.walls = new BuildMap(this);
+        this.obstacles = new BuildMap(this);
+        console.log(this.obstacles)
+        
         //this.algorithm = new A_STAR_Algorithm(this);
-        this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));
+        this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));        
         this.geometry = new TeamGeometry(this.followers);
         new InputHandler(this.warrior);
         this.bushes = Boundaries(this);
         this.tulips = this.followers.map(follower => new Tulip(follower));
-        this.gameObjects = [this.warrior, this.tank, ...this.followers, ...this.bushes, ...this.walls];
-        this.gameSubjects = [this.geometry, ...this.tulips, ...this.walls, this.tank];        
+        this.gameObjects = [...this.obstacles, this.warrior, this.tank, ...this.followers, ...this.bushes];
+        this.gameSubjects = [this.geometry, ...this.tulips, ...this.obstacles, this.tank];        
         //this.algorithm.start();
-        Statistics(this.followers);
-        
+        Statistics(this.followers);        
     }
 
     draw(ctx) {
         this.gameObjects.forEach(obj => obj.draw(ctx));
     }
 
-    update(deltaTime) {
+    update(deltaTime) {        
         this.warrior.update(deltaTime);
+        this.obstacles = [...this.obstacles].filter(obstacle => obstacle.crushed === false);
         this.followers.forEach(follower => follower.update(deltaTime));
-        this.followers = [...this.followers].filter(follower => follower.health !== 0); 
+        this.followers = [...this.followers].filter(follower => follower.health !== 0);        
         Update(this.followers);       
         this.gameSubjects.forEach(subj => subj.update(deltaTime));
     }

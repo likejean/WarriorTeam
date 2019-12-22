@@ -27,5 +27,16 @@ export const CanvasTopBottomApproachAndExit = (unit, limit, deltaTime) => {
     unit.canvas_limit = true;
     unit.vector.dy = 0;
     unit.position.y = limit;                    
-    unit.position.x -= Math.sin(unit.angle() + Math.PI / 2) * unit.speed * deltaTime / 5;
+    unit.position.x -= Math.cos(unit.angle() + Math.PI / 2) * unit.speed * deltaTime / 5;
+}
+
+export const TankCollision = wall => {
+    let tank_x_pos = wall.game.tank.position.x,
+        tank_y_pos = wall.game.tank.position.y,
+        wall_x_pos = wall.position.x + wall.width / 2,
+        wall_y_pos = wall.position.y + wall.height / 2,
+        distance = Math.sqrt(Math.pow(tank_x_pos - wall_x_pos, 2) + Math.pow(tank_y_pos - wall_y_pos, 2));
+    if (distance < 285) {
+        wall.crushed = true;             
+    }       
 }
