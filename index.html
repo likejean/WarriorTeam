@@ -23,6 +23,10 @@
             background: lightcyan;
             background-image: url('assets/field.jpg');
         }
+        h1{
+            font-size: 85px;
+            text-align: center;
+        }
         img {
             display: none;
         }
@@ -35,6 +39,9 @@
         } 
         label:after { 
             content: ": " 
+        }
+        .container {
+            margin:0;
         }
         .bar-container {
             width: 500px;
@@ -63,7 +70,16 @@
             height='4000px'
         >
         </canvas>
-        <div id="followers"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" id="followers">
+                    <h1>Followers</h1>
+                </div>
+                <div class="col-6" id="tank">
+                    <h1>Battle Tank</h1>
+                </div>
+            </div>            
+        </div>       
         <p style="font-size: 75px;">
             User Arrow Keys to Move Warrior Leader 'Up', 'Down', 'Right', 'Left'
         </p>

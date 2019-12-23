@@ -32,8 +32,6 @@ export default class Game {
         this.warrior = new Warrior(this);
         this.tank = new Tank(this);
         this.obstacles = new BuildMap(this);
-        console.log(this.obstacles)
-        
         //this.algorithm = new A_STAR_Algorithm(this);
         this.followers_init.map((follower, idx) => this.followers.push(new Follower(this, follower[0], follower[1], idx + 1, canvas)));        
         this.geometry = new TeamGeometry(this.followers);
@@ -43,19 +41,20 @@ export default class Game {
         this.gameObjects = [...this.obstacles, this.warrior, this.tank, ...this.followers, ...this.bushes];
         this.gameSubjects = [this.geometry, ...this.tulips, ...this.obstacles, this.tank];        
         //this.algorithm.start();
-        Statistics(this.followers);        
+        Statistics(this.followers, this.tank);        
     }
 
     draw(ctx) {
         this.gameObjects.forEach(obj => obj.draw(ctx));
     }
 
-    update(deltaTime) {        
+    update(deltaTime) {  
+        console.log(this.tank.health)      
         this.warrior.update(deltaTime);
         this.obstacles = [...this.obstacles].filter(obstacle => obstacle.crushed === false);
         this.followers.forEach(follower => follower.update(deltaTime));
         this.followers = [...this.followers].filter(follower => follower.health !== 0);        
-        Update(this.followers);       
+        Update(this.followers, this.tank);       
         this.gameSubjects.forEach(subj => subj.update(deltaTime));
     }
 }

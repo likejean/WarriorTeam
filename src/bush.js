@@ -8,6 +8,7 @@ export default class Bush {
         this.width = size1;
         this.height = size2;
         this.direction = direction;
+        this.type = 'bush';
     }
     draw(ctx) {
         this.img.src = 'assets/Bushes/' + this.direction + 'Bush.png';

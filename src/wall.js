@@ -5,6 +5,7 @@ import { TankCollision } from '../helpers/functions/tank_functions.js';
 export default class Wall {
     constructor(game, id, position, size) {
         this.position = position;
+        this.type = 'wall';
         this.id = id;
         this.game = game;
         this.img = new Image();
@@ -24,8 +25,10 @@ export default class Wall {
     }
 
     update(deltaTime) {
-        if(!this.crushed) WarriorCollision(this);
-        if(!this.crushed) FollowerCollision(this, deltaTime);
-        TankCollision(this);
+        if(!this.crushed) {
+            WarriorCollision(this);
+            FollowerCollision(this, deltaTime);
+            TankCollision(this);
+        }else return        
     }
 }

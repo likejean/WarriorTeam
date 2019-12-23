@@ -1,6 +1,6 @@
-import { DamageZone } from '../helpers/functions/casualty_function.js';
+import { WoundAndKillZone, DamageAndDestroyZone } from '../helpers/functions/casualty_function.js';
 export default class CannonBall {
-    constructor (position, ammunition, followers) {
+    constructor (position, ammunition, followers, tank) {
         this.img = new Image();
         this.position = {
             x: position[0],
@@ -9,6 +9,7 @@ export default class CannonBall {
         this.start = position;
         this.ammunition = ammunition;
         this.followers = followers;
+        this.tank = tank;
         this.width = 50;
         this.height = 50;
         this.speed  = 1;
@@ -39,7 +40,8 @@ export default class CannonBall {
     update(deltaTime) {        
         this.travel += this.speed * deltaTime;
         if (this.travel >= this.range) { 
-            DamageZone(this.followers, this.position);
+            WoundAndKillZone(this.followers, this.position);
+            DamageAndDestroyZone(this.tank, this.position);
             this.ammunition--;           
             if (this.direction == 0 || this.direction == 1) this.position.x = this.start[0];
             if (this.direction == 2 || this.direction == 3) this.position.y = this.start[1];

@@ -13,11 +13,13 @@ export default class Tank {
         this.type = 'tank';        
         this.width = 500;
         this.height = 500;
+        this.health = 100;
         this.travel = 0;
         this.speed  = 1;
+        this.id = 0;
         this.count = 0;
         this.canvas_limit = false;
-        this.path_base = 500;
+        this.path_base = 600;
         this.exceed_limit_attempt = 4;
         this.position = {
             x: game.tank_init[0],
@@ -25,8 +27,8 @@ export default class Tank {
         };  
         //Randomnizes direction in dx & dy components
         this.vector = {
-            dx: -6500,
-            dy: -6000
+            dx: -9500,
+            dy: -9000
         };
         this.angle = () =>
             this.vector.dx < 0 && this.vector.dy >= 0 ? Math.atan(this.vector.dy / this.vector.dx) - Math.PI / 2

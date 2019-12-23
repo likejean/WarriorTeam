@@ -13,7 +13,7 @@ export default class Follower {
         this.i = x_pos;
         this.j = y_pos;
         this.id = index;
-        this.width = 100;
+        this.width = 75;
         this.height = 100;
         this.maxSpeed = 2; 
         this.speed_x = 0;
@@ -21,6 +21,7 @@ export default class Follower {
         this.walkValue = 1;
         this.health = 6;
         this.collision = false;
+        this.death_location = {x: 0, y: 0, angle: 0};
         this.boundary_clearance = 110;
         this.wall_offset ={
             x: 3,
@@ -47,14 +48,12 @@ export default class Follower {
         this.angle = () => 
             this.dist_x(this.warrior.position.x, this.warrior.width) <= 0 
             ? 
-                Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height))/this.DISTANCE()) 
+            Math.PI - Math.asin((this.dist_y(this.warrior.position.y,this.warrior.height)) / this.DISTANCE()) 
             : 
-                Math.asin((this.dist_y(this.warrior.position.y, this.warrior.height))/this.DISTANCE());
-
-        
+            Math.asin((this.dist_y(this.warrior.position.y, this.warrior.height)) / this.DISTANCE());        
     }
     draw(ctx) {
-        if (this.health > 0){
+        if (this.health > 1){
             this.position.x > 0 && this.position.y > 0 ?
             this.speed_x !== 0 && this.speed_y !== 0 
             ? 
@@ -68,7 +67,19 @@ export default class Follower {
             ctx.drawImage(this.img, this.width / -2, this.height / -2, this.width, this.height);        
             ctx.restore();
         } 
-        else return
+        else if (this.health == 1) {            
+            this.speed_x = 0;
+            this.speed_y = 0;
+            if (this.death_location.x == 0) this.death_location.x = this.position.x;
+            if (this.death_location.y == 0) this.death_location.y = this.position.y;
+            if (this.death_location.angle == 0) this.death_location.angle = this.angle();
+            this.img.src = 'assets/Killed.png'; 
+            ctx.save();
+            ctx.translate(this.death_location.x, this.death_location.y); 
+            ctx.rotate(this.death_location.angle);
+            ctx.drawImage(this.img, this.width / -2, this.height / -2, this.width, this.height);        
+            ctx.restore();
+        }
     }
 
     update(deltaTime) {

@@ -1,5 +1,6 @@
 import { WarriorCollision } from '../helpers/functions/warrior_functions.js';
 import { FollowerCollision } from '../helpers/functions/follower_functions.js';
+import { TankCollision } from '../helpers/functions/tank_functions.js';
 import CannonBall from './cannonball.js';
 export default class Cannon {
     constructor (game, size, position) {
@@ -9,13 +10,14 @@ export default class Cannon {
             y: position[1]
         }
         this.game = game;
+        this.type = 'cannon';
         this.width = size.x;
         this.height = size.y;
         this.direction = 0;
         this.crushed = false;
         this.life = 10;
         this.ammunition = 1000;
-        this.cannonball = new CannonBall(position, this.ammunition, this.game.followers); 
+        this.cannonball = new CannonBall(position, this.ammunition, this.game.followers, this.game.tank); 
     }
 
     
@@ -30,5 +32,6 @@ export default class Cannon {
         this.cannonball.ammunition > 0 ? this.cannonball.update(deltaTime/5) : null;
         WarriorCollision(this);
         FollowerCollision(this, deltaTime);
+        TankCollision(this);
     }
 }
